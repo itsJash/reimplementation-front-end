@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import axios, { AxiosError } from 'axios';
 import { alertActions } from "../../store/slices/alertSlice";
 import { useDispatch } from "react-redux";
 
@@ -12,8 +11,8 @@ const ForgotPassword = () =>{
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
     try {
-      console.log(email);
-      await axios.post("http://localhost:3002/password_resets", { email });
+      await axios.post("http://localhost:3002/api/v1/password_resets", { email });
+
       dispatch(
         alertActions.showAlert({
           variant: "success",
@@ -21,12 +20,17 @@ const ForgotPassword = () =>{
         })
       );
     } catch (error) {
-      dispatch(
-        alertActions.showAlert({
-          variant: "danger",
-          message: `No account is associated with the e-mail address: "${email}". Please try again.`,
-        })
-      );
+      if (error instanceof AxiosError && error.response && error.response.data) {
+        const { error: errorMessage} = error.response.data;
+        if (errorMessage) {
+          dispatch(
+            alertActions.showAlert({
+              variant: "danger",
+              message: errorMessage,
+            })
+          );
+        }
+      }
     }
   };
 
