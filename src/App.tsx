@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import AdministratorLayout from "./layout/Administrator";
 import ManageUserTypes, { loader as loadUsers } from "./pages/Administrator/ManageUserTypes";
 import Login from "./pages/Authentication/Login";
+import ForgotPassword from "./pages/Authentication/ForgotPassword";
 import Logout from "./pages/Authentication/Logout";
 import InstitutionEditor, { loadInstitution } from "./pages/Institutions/InstitutionEditor";
 import Institutions, { loadInstitutions } from "./pages/Institutions/Institutions";
@@ -49,6 +50,7 @@ function App() {
       children: [
         { index: true, element: <ProtectedRoute element={<Home />} /> },
         { path: "login", element: <Login /> },
+        { path: "forgot-password", element: <ForgotPassword /> },
         { path: "logout", element: <ProtectedRoute element={<Logout />} /> },
         // Add the ViewTeamGrades route
         {
