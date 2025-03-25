@@ -11,7 +11,7 @@ const ForgotPassword = () =>{
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
     try {
-      await axios.post("http://localhost:3002/api/v1/password_resets", { email });
+      await axios.post("http://152.7.177.227:3002/api/v1/password_resets", { email });
 
       dispatch(
         alertActions.showAlert({

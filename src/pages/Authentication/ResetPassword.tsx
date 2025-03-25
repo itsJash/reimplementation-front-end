@@ -38,7 +38,7 @@ const ResetPassword = () => {
     else {
       try {
         // Send password reset request to the backend
-        await axios.put(`http://localhost:3002/api/v1/password_resets/${token}`, {
+        await axios.put(`http://152.7.177.227:3002/api/v1/password_resets/${token}`, {
           user: { password },
         });
 
